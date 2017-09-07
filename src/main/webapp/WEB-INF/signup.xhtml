@@ -1,0 +1,38 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<b:modal id="signupModal" title="Regiter Your User" styleClass="modalPseudoClass">
+		<b:form id="registerForm">
+			
+			<h:outputText value="Username" />
+			<b:inputText id="username" value="#{login.user}" placeholder="type your name"/>
+			<b:message for="username"/>
+			
+			<h:outputText value="Password" />
+			<b:inputSecret id="password" value="#{login.pwd}" placeholder="type your password"/>
+			<b:message for="password"/>
+			
+			<h:outputText value="RepeatPassword" />
+			<b:inputSecret id="repeatpassword" value="#{login.pwd}" placeholder="type your password again"/>
+			<b:message for="repeatpassword"/>
+			
+			<h:outputText value="Email" />
+			<b:inputText id="email" value="#{login.email}" placeholder="type your email"/>
+			<b:message for="email"/>
+			
+			<h:outputText value="BirthDate" />
+			<b:inputText id="birthDate" value="#{login.birthDate}" placeholder="type your birth date"/>
+			<b:message for="birthDate"/>
+			
+			<br/>
+			
+	        <b:commandButton style="margin-right:5px;" id="registerButton" value="Register" look="success" action="#{login.registerUser}" dismiss="modal" />
+	        <b:button value="Cancel" look="danger" dismiss="modal" />
+	
+		    <b:message for="registerButton"/>
+		</b:form>
+	</b:modal>
+</ui:composition>

@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	  xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Happy Pet Super Shop!</title>
+        <meta name="author" content="The Author"></meta>
+    </h:head>
+    <h:body pt:onload="$('#loginRegisterModal').modal('show');" style="padding: 60px;" onresize="resizeImage($('#bgImage'))">
+    	<b:form id="logoutForm">
+			<ui:include src="/WEB-INF/usermenu.xhtml" />
+		</b:form>
+		<ui:include src="/WEB-INF/signin.xhtml" />
+		<ui:include src="/WEB-INF/signup.xhtml" />
+		<b:row>
+			<b:image value="resources/images/centralpetstore.png" style="height:50%; width:50%;"/>
+		</b:row>
+		<b:row>
+			<ui:include src="/WEB-INF/loginregister.xhtml" />
+		</b:row>
+		<b:row>
+			<ui:include src="/WEB-INF/listproducts.xhtml" />
+		</b:row>
+    </h:body>
+</html>

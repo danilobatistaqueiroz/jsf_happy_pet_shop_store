@@ -1,0 +1,16 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+	<b:modal rendered="#{empty username}" id="loginRegisterModal" title="Regiter Your User" styleClass="modalPseudoClass" size="modal-sm">
+		<b:form id="otherForm">
+	    	<h:outputText value="You are not logged!" rendered="#{empty username}"/>
+	    	<br/><br/>
+	        <b:button dismiss="modal" p:data-target="#signinModal" p:data-toggle="modal" style="margin-right:5px;" rendered="#{empty username}" value="login" look="primary"  size="lg"/>
+	        <b:button dismiss="modal" rendered="#{empty username}" value="sign up" look="success" p:data-target="#signupModal" p:data-toggle="modal" size="lg"/>
+		</b:form>
+	</b:modal>
+</ui:composition>

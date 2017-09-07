@@ -1,0 +1,41 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<style>
+		.column1 { width: 100px; }
+		.column2 { width: 200px; }
+		.column3 { width: 10px; }
+		.column4 { width: 10px; }
+	</style>
+		<h:form id="frmProdutos">
+		<b:container style="margin-left:10px;margin-right:20px;">
+			<b:row>
+				<b:column>
+					<h:dataTable columnClasses="column1,column2,column3,column4" value="#{productsListBean.listOfProducts}"  styleClass="table table-hover" tableStyleClass="table table-striped" var="product">
+						<h:column>
+							<f:facet name="header">Name</f:facet>
+							<h:outputText id="name" value="#{product.name}"/>
+						</h:column>
+						<h:column>
+							<f:facet name="header">Description</f:facet>
+							<h:outputText id="description" value="#{product.description}"/>
+						</h:column>
+						<h:column>
+							<f:facet name="header">Price</f:facet>
+							<h:outputText id="price" value="#{product.price}"/>
+						</h:column>
+						<h:column>
+							<f:facet name="header">Add to Cart</f:facet>
+							<b:iconAwesome name="fa-shopping-cart" action="#{shopCartBean.update(product.id)}" onclick="location.reload();">
+								<f:ajax event="click" render="frmProdutos"/>
+							</b:iconAwesome>
+						</h:column>
+					</h:dataTable>
+				</b:column>
+			</b:row>
+		</b:container>
+		</h:form>
+</ui:composition>
