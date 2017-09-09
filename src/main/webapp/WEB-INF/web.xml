@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
   <display-name>tutorialJSF</display-name>
+  
+<mime-mapping>
+   <extension>ico</extension>
+   <mime-type>image/x-icon</mime-type>
+</mime-mapping>
+
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -26,20 +32,19 @@
 	</context-param>
 
     <login-config>
-        <auth-method>BASIC</auth-method>
+        <auth-method>FORM</auth-method>
         <realm-name>secureDomain</realm-name>
         <form-login-config>
-            <form-login-page>/faces/login.xhtml</form-login-page>
-            <form-error-page>/faces/loginerror.xhtml</form-error-page>
+            <form-login-page>/welcome.xhtml</form-login-page>
+            <form-error-page>/welcome.xhtml</form-error-page>
         </form-login-config>
 	</login-config>
 	
-   <security-constraint>
-        <display-name>Admin Pages</display-name>
-        <web-resource-collection>
-            <web-resource-name>Protected Admin Area</web-resource-name>
-            <description></description>
-            <url-pattern>/faces/admin/*</url-pattern>
+<security-constraint>
+	<display-name>Admin Area</display-name>
+	<web-resource-collection>
+		<web-resource-name>Restricted Access</web-resource-name>
+		<url-pattern>/admin/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
             <http-method>HEAD</http-method>
@@ -47,21 +52,21 @@
             <http-method>OPTIONS</http-method>
             <http-method>TRACE</http-method>
             <http-method>DELETE</http-method>
-        </web-resource-collection>
-        <auth-constraint>
-            <description/>
-            <role-name>ADMIN</role-name>
-        </auth-constraint>
-        <user-data-constraint>
-            <transport-guarantee>NONE</transport-guarantee>
-        </user-data-constraint>
-    </security-constraint>
+	</web-resource-collection>
+	<auth-constraint>
+		<role-name>admin</role-name>
+	</auth-constraint>
+	<user-data-constraint>
+		<transport-guarantee>NONE</transport-guarantee>
+	</user-data-constraint>
+</security-constraint>
+
     <security-constraint>
         <display-name>All Access</display-name>
         <web-resource-collection>
             <web-resource-name>None Protected User Area</web-resource-name>
             <description/>
-            <url-pattern>/faces/users/*</url-pattern>
+            <url-pattern>/customer/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
             <http-method>HEAD</http-method>
@@ -75,6 +80,6 @@
         </user-data-constraint>
     </security-constraint>
     <security-role>  
-         <role-name>ADMIN</role-name>  
+         <role-name>commonUser</role-name>  
 	</security-role> 
 </web-app>

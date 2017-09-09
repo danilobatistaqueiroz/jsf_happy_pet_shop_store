@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15046743470821" configfile="/JsfTutorials/src/main/webapp/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="122" y="178" id="pf15046785439892" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf150472589416913 pf150472589416914" path="/login.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="welcome.xhtml" x="554" y="370" id="pf15047238673864" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" outlinks="pf150476864329620 pf150476864329621 pf150476864329622" inlinks="pf150472589416915 pf150472589416916 pf150476864329622" path="/welcome.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="loginF.xhtml" x="122" y="562" id="pf15047238673865" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf150472589416917 pf150472589416918" path="/loginFaces.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="m.xhtml" x="122" y="947" id="pf15047252404718" referenceLink="//@navigationRule.0/@fromViewId|" path="/welcome.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="admin/startpage.xhtml" x="338" y="178" id="pf150472586060611" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf150472589416915" inlinks="pf150472589416913 pf150472589416918 pf150476864329620" path="/admin/startpage.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="users/shoppage.xhtml" x="338" y="562" id="pf150472586060612" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf150472589416916" inlinks="pf150472589416914 pf150472589416917 pf150476864329621" path="/users/shoppage.xhtml"/>
-  <links id="pf150472589416913" target="pf150472586060611" source="pf15046785439892" outcome="adminUser"/>
-  <links id="pf150472589416914" target="pf150472586060612" source="pf15046785439892" outcome="commonUser"/>
-  <links id="pf150472589416917" target="pf150472586060612" source="pf15047238673865" outcome="commonUser"/>
-  <links id="pf150472589416918" target="pf150472586060611" source="pf15047238673865" outcome="adminUser"/>
-  <links id="pf150472589416915" target="pf15047238673864" source="pf150472586060611" outcome="logout"/>
-  <links id="pf150472589416916" target="pf15047238673864" source="pf150472586060612" outcome="logout"/>
-  <links id="pf150476864329620" target="pf150472586060611" source="pf15047238673864" outcome="adminUser"/>
-  <links id="pf150476864329621" target="pf150472586060612" source="pf15047238673864" outcome="commonUser"/>
-  <links id="pf150476864329622" target="pf15047238673864" source="pf15047238673864" outcome="logout">
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="122" y="178" id="pf15046785439892" referenceLink="//@navigationRule.1/@fromViewId|" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="welcome.xhtml" x="338" y="1522" id="pf15047238673864" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf15048384097900 pf15049014411443 pf15049014411444" inlinks="pf15048384097900 pf15049014299890 pf15049014299891" path="/welcome.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="loginF.xhtml" x="122" y="562" id="pf15047238673865" referenceLink="//@navigationRule.2/@fromViewId|" path="/loginFaces.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="m.xhtml" x="122" y="946" id="pf15047252404718" referenceLink="//@navigationRule.0/@fromViewId|" path="/welcome.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="customer/startpage.xhtml" x="122" y="2099" id="pf15048384097902" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" outlinks="pf15049014299891" inlinks="pf15049014411443" path="/customer/startpage.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="admin/startpage.xhtml" id="pf15049014299892" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" outlinks="pf15049014299890" inlinks="pf15049014411444" path="/admin/startpage.xhtml"/>
+  <links id="pf15048384097900" target="pf15047238673864" source="pf15047238673864" outcome="logout" redirect="true">
     <bendPoints d1Height="-36" d2Height="-36"/>
     <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
     <bendPoints d1Width="-64" d2Width="-64"/>
   </links>
+  <links id="pf15049014299890" target="pf15047238673864" source="pf15049014299892" outcome="logout" redirect="true"/>
+  <links id="pf15049014299891" target="pf15047238673864" source="pf15048384097902" outcome="logout" redirect="true"/>
+  <links id="pf15049014411443" target="pf15048384097902" source="pf15047238673864" outcome="commonUser" redirect="true"/>
+  <links id="pf15049014411444" target="pf15049014299892" source="pf15047238673864" outcome="adminUser" redirect="true"/>
 </pageflow:Pageflow>

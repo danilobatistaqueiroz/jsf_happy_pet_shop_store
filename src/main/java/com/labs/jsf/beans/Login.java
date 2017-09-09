@@ -2,7 +2,6 @@ package com.labs.jsf.beans;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -10,9 +9,8 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Size;
-
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.NotEmpty;
-
 import com.labs.jsf.util.SessionUtils;
 
 @ManagedBean
@@ -81,12 +79,14 @@ public class Login implements Serializable {
 	// }
 
 	public String loginUser() {
+		System.out.println("entering, with login");
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
 		try {
 			HttpSession session = SessionUtils.getSession();
 			if (session.getAttribute("username") == null || session.getAttribute("username").equals("") == true) {
 				request.login(user, pwd);
+				user = StringUtils.capitalize(user);
 				session.setAttribute("username", user);
 				// } else {
 				// FacesMessage msg = new
@@ -96,8 +96,14 @@ public class Login implements Serializable {
 				// msg);
 			}
 			if (request.isUserInRole("admin")) {
+				System.out.println("im a administrator user");
+				session.setAttribute("isadmin", true);
+				//FacesContext.getCurrentInstance().getExternalContext().redirect("admin/startpage.xhtml");
 				return "adminUser";
 			} else {
+				session.setAttribute("isadmin", false);
+				System.out.println("im a common user");
+				//FacesContext.getCurrentInstance().getExternalContext().redirect("customer/startpage.xhtml");
 				return "commonUser";
 			}
 		} catch (Exception ex) {
@@ -119,5 +125,12 @@ public class Login implements Serializable {
 	public String registerUser() {
 		System.out.println("registering");
 		return "registered";
+	}
+
+	public void forgotPassword() {
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Default user name: BootsFaces");
+		FacesContext.getCurrentInstance().addMessage("loginForm:username", msg);
+		msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Default password: rocks!");
+		FacesContext.getCurrentInstance().addMessage("loginForm:password", msg);
 	}
 }

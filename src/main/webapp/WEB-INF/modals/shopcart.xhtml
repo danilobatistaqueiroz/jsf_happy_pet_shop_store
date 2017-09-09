@@ -1,0 +1,49 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<b:modal id="shopcartModal" title="Your Shop Cart" styleClass="modalPseudoClass">
+		<b:form id="shopForm">
+			
+			<h:dataTable columnClasses="column1,column2,column3,column4" value="#{shopCartBean.productsCart}"  styleClass="table table-hover" tableStyleClass="table table-striped" var="product">
+				<h:column>
+					<f:facet name="header">Name</f:facet>
+					<h:outputText id="name" value="#{product.name}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Price</f:facet>
+					<h:outputText id="price" value="#{product.price}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Quantity</f:facet>
+					<h:outputText id="quantity" value="#{product.quantity}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">+</f:facet>
+					<b:iconAwesome name="fa-caret-square-o-up" update="messages" action="#{shopCartBean.update(product.id,1)}" onclick="location.reload();">
+						<f:ajax event="click" render="frmProdutos"/>
+					</b:iconAwesome>
+				</h:column>
+				<h:column>
+					<f:facet name="header">-</f:facet>
+					<b:iconAwesome name="fa-caret-square-o-down" update="messages" action="#{shopCartBean.update(product.id,-1)}" onclick="location.reload();">
+						<f:ajax event="click" render="frmProdutos"/>
+					</b:iconAwesome>
+				</h:column>
+				<h:column>
+					<f:facet name="header">x</f:facet>
+					<b:iconAwesome name="fa-remove" update="messages" action="#{shopCartBean.remove(product.id)}" onclick="location.reload();">
+						<f:ajax event="click" render="frmProdutos"/>
+					</b:iconAwesome>
+				</h:column>
+
+			</h:dataTable>
+			
+			<br/>
+	
+		    <b:message id="messages" />
+		</b:form>
+	</b:modal>
+</ui:composition>

@@ -1,0 +1,4 @@
+<login-config>
+	<auth-method>BASIC</auth-method>
+	<realm-name>default</realm-name>
+</login-config>

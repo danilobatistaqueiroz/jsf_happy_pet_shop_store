@@ -12,17 +12,19 @@
 		    <b:navLink value="Contact" href="#contact"></b:navLink>
 		    <b:navLink value="Search" href="#"></b:navLink>
 			<b:form rendered="#{empty username}" class="navbar-form navbar-left hidden-md hidden-sm hidden-xs" role="search">
-			    <b:button style="margin-left:20px;margin-top:10px;padding:5px;" look="info" type="submit" class="btn btn-default" value="Login" p:data-target="#signinModal" p:data-toggle="modal"/>
-			    <b:button style="margin-left:20px;margin-top:10px;padding:5px;" look="success" type="submit" class="btn btn-default" value="SignUp" p:data-target="#signupModal" p:data-toggle="modal"/>
+			    <b:button style="margin-left:20px;margin-top:10px;padding:5px;" look="info" class="btn btn-default" value="Login" p:data-target="#signinModal" p:data-toggle="modal"/>
+			    <b:button style="margin-left:20px;margin-top:10px;padding:5px;" look="success" class="btn btn-default" value="SignUp" p:data-target="#signupModal" p:data-toggle="modal"/>
 			</b:form>
-			<b:dropMenu value="Dropdown" rendered="#{not empty username}">
+			<b:dropMenu iconAwesome="fa-user" value="#{username}" rendered="#{not empty username}">
 			     <b:navLink value="Account" href="#"></b:navLink>
 			     <b:navLink value="Shop Cart" href="#"></b:navLink>
 			     <b:navLink value="Wish List" href="#"></b:navLink>
-			     <b:navLink></b:navLink>
-			     <b:navLink header="Nav header"></b:navLink>
-			     <b:navCommandLink rendered="#{not empty username}" value="logout" iconAlign="right" actionListener="#{login.logout}" icon="fa-sign-out"/>
+			     <b:navLink header="   "/>
+			     <b:navLink value="Logout" href="#" onclick="$('button[id$=logoutButton]').click();"></b:navLink>
 			</b:dropMenu>
-		</b:navbarLinks>
+			<b:form name="logoutForm">
+				<b:commandButton style="visibility:hidden;display:none;" id="logoutButton" action="#{login.logout}" rendered="#{not empty username}"/>
+			</b:form>
+		</b:navbarLinks>"
 	</b:navBar>
 </ui:composition>

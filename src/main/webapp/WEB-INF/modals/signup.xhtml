@@ -4,7 +4,7 @@
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:b="http://bootsfaces.net/ui"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-	<b:modal id="signupModal" title="Regiter Your User" styleClass="modalPseudoClass">
+	<b:modal id="signupModal" rendered="#{empty username}" title="Regiter Your User" styleClass="modalPseudoClass">
 		<b:form id="registerForm">
 			
 			<h:outputText value="Username" />

@@ -1,7 +1,6 @@
 package com.labs.jsf.beans;
 
 import java.io.IOException;
-
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -10,51 +9,56 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-
-import com.labs.jsf.dao.ProductsDAO;
-import com.labs.jsf.model.Products;
+import com.labs.jsf.dao.ProductDAO;
+import com.labs.jsf.model.Product;
 import com.labs.jsf.util.MessagesHelper;
 
 @RequestScoped
 @Named
 public class ProductsBean {
 
-	private Products products = new Products();
+	private Product product = new Product();
 	@Inject
-	private ProductsDAO productsDAO;
+	private ProductDAO productDAO;
 	@Inject
 	private MessagesHelper messagesHelper;
 
 	@Transactional
 	public String save() {
 
-		productsDAO.save(products);
+		productDAO.save(product);
 
-		messagesHelper.addFlash(new FacesMessage("Produto inserido com sucesso"));
-		return "/admin/produtos/list?faces-redirect=true";
+		//FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Product Edition", "Product inserted with suscess!");
+		//FacesContext context = FacesContext.getCurrentInstance();
+		//context.addMessage("updateButton", message);
+		return "/admin_startpage?faces-redirect=true";
 	}
 
 	@Transactional
-	public String update(Long id, Double price) {
+	public String update() {
+		System.out.println("updating product - price:"+product.getPrice());
 
-		Products products = productsDAO.findById(id);
-		products.setPrice(price);
-		productsDAO.save(products);
+		Product products = productDAO.findById(product.getId());
+		products.setPrice(product.getPrice());
+		productDAO.save(products);
 
-		// FacesMessage message = new FacesMessage("Produto atualizado com
-		// sucesso");
-		// FacesContext.getCurrentInstance().addMessage("messages",message);
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Product Edition", "Product updated with suscess!");
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage("messages", message);
 		reload();
-		return "/admin/produtos/list?faces-redirect=true";
+		return "/admin_startpage?faces-redirect=true";
 	}
 
 	@Transactional
-	public String remove(Long id) {
+	public String remove() {
 
-		Products products = productsDAO.findById(id);
-		productsDAO.remove(products);
+		Product products = productDAO.findById(product.getId());
+		productDAO.remove(products);
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Product Edition", "Product removed with suscess!");
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage("messages", message);
 		reload();
-		return "/admin/produtos/list?faces-redirect=true";
+		return "/admin_startpage?faces-redirect=true";
 	}
 
 	public void reload() {

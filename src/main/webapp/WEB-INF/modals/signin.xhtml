@@ -4,7 +4,7 @@
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:b="http://bootsfaces.net/ui"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-		<b:modal id="signinModal" title="Enter Your User and Password" styleClass="modalPseudoClass">
+		<b:modal id="signinModal" rendered="#{empty username}" title="Enter Your User and Password" styleClass="modalPseudoClass">
 			<b:form id="loginForm">
 				
 				<h:outputText value="Username" for="username" />
@@ -25,7 +25,7 @@
 				
 				<br/>
 				
-		        <b:commandButton style="margin-right:5px;" update="@form" id="loginButton" value="Login" look="success" action="#{login.loginUser}" dismiss="modal" />
+		        <b:commandButton style="margin-right:5px;" update="@form" id="loginButton" value="Login" look="success" action="#{login.loginUser}" data-dismiss="modal" />
 		        <b:button value="Forgot Password" look="danger" dismiss="modal" />
 		
 			    <b:message for="loginButton"/>

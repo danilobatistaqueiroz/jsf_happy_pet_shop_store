@@ -1,25 +1,8 @@
 package com.labs.jsf.model;
 
 public class ProductCart {
-	private String name;
-	private double price;
+	private Product product;
 	private int quantity;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
 
 	public int getQuantity() {
 		return quantity;
@@ -27,5 +10,13 @@ public class ProductCart {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 }
