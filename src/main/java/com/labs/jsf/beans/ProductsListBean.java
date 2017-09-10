@@ -3,15 +3,16 @@ package com.labs.jsf.beans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.annotation.PostConstruct;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.transaction.Transactional;
 import com.labs.jsf.dao.ProductDAO;
 import com.labs.jsf.model.Product;
 
-@ManagedBean
-@SessionScoped
+@Named
+@ViewScoped
 public class ProductsListBean implements Serializable {
 
 	private static final long serialVersionUID = -8474579766112727807L;
@@ -40,18 +41,22 @@ public class ProductsListBean implements Serializable {
 		this.product = product;
 	}
 
+	@PostConstruct
 	public void init() {
-		System.out.println("$$$$$$$ carregando os produtos");
-		this.listProducts = productDAO.list();
+		System.out.println("passa aqui !!!!");
+		if(this.listProducts.size()==0){
+			System.out.println("$$$$$$$ loading products");
+			this.listProducts = productDAO.list();
+		}
 	}
 
 	public void search(String name) {
-		System.out.println("pesquisando os produtos");
-		this.listProducts = productDAO.search(name);
+		System.out.println("searching products");
+		//this.listProducts = productDAO.search(name);
 	}
 
 	public List<Product> getListOfProducts() {
-		System.out.println("carregando a lista de produtos");
+		System.out.println("getting the list of products");
 		return listProducts;
 	}
 
@@ -63,8 +68,17 @@ public class ProductsListBean implements Serializable {
 	@Transactional
 	public void save(Product product) {
 		System.out.println("saving the product: id:"+product.getId()+"price:"+product.getPrice());
-		productDAO.save(product);
+		Product dbProduct = productDAO.findById(product.getId());
+		dbProduct.setPrice(product.getPrice());
+		productDAO.save(dbProduct);
 		editMode(false, new Product());
+	}
+
+	@Transactional
+	public void remove(Product product) {
+		System.out.println("removing");
+		Product dbProduct = productDAO.findById(product.getId());
+		productDAO.remove(dbProduct);
 	}
 
 	private void editMode(boolean edit, Product product){

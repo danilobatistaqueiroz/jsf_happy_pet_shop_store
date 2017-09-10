@@ -1,16 +1,16 @@
 package com.labs.jsf.dao;
 
 import java.util.List;
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import com.labs.jsf.model.Product;
 
-@ApplicationScoped
+@RequestScoped
 public class ProductDAO {
 
-	@PersistenceContext(unitName = "labs-persistence-unit")
+	@Inject
 	private EntityManager manager;
 
 	public ProductDAO() {

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Shopping Cart</title>
+</h:head>
+<h:body>
+	<f:view>
+		<b:form id="itemsForm">
+			<b:modal id="shopcartModal" title="Your Shopping Cart" styleClass="modalPseudoClass">
+				<p:outputPanel id="items">
+					<b:dataTable id="cartTable" value="#{cartBean.itemList}" var="itemCart" class="editableCartTable">
+						<b:dataTableColumn value="#{itemCart.name}">
+						</b:dataTableColumn>
+						<b:dataTableColumn value="#{itemCart.description}">
+						</b:dataTableColumn>
+						<b:dataTableColumn value="#{itemCart.price}">
+						</b:dataTableColumn>
+						<b:dataTableColumn label="Quantity">
+							<b:inputText id="qtd" value="#{itemCart.quantity}" size="4" />
+							<b:commandButton size="xs" icon="plus" ajax="true"
+								update="qtd :itemsForm:total" onclick="ajax:itemCart.sum(1)" />
+							<b:commandButton size="xs" icon="minus" ajax="true"
+								update="qtd @(.total)" onclick="ajax:itemCart.sum(-1)" />
+						</b:dataTableColumn>
+						<b:dataTableColumn label=" ">
+							<b:commandButton look="danger" icon="trash" ajax="true"
+								update="@(.editableCartTable) @(.total)" value="Remove"
+								onclick="ajax:cartBean.removeItem(itemCart)" />
+						</b:dataTableColumn>
+					</b:dataTable>
+					Total Order: $<h:outputText id="total" class="total" value="#{cartBean.getTotalOrderValue()}" />
+				</p:outputPanel>
+			</b:modal>
+			<b:commandButton value="add item" onclick="ajax:cartBean.addItem('a','aa',1,1)" update="itemsForm"/>
+		</b:form>
+		<b:button value="show cart" look="success" onclick="$('.modalPseudoClass').modal()" size="lg"/>
+	</f:view>
+</h:body>
+</html>

@@ -11,9 +11,9 @@
 		.column4 { width: 10px; }
 		.column5 { width: 10px; }
 	</style>
-	<h:form id="frmProdutos" >
-		<f:view><f:event type="preRenderView" listener="#{productsListBean.init}"/></f:view>
-		<b:container style="margin-left:10px;margin-right:20px;">
+	<b:form id="frmProducts" >
+		
+		<b:container id="cProducts" style="margin-left:10px;margin-right:20px;">
 			<b:row>
 			<b:column span="6">
 				<h:outputText value="#{login.user}"/>
@@ -27,35 +27,35 @@
 			</b:row>
 			<b:row>
 				<b:column>
-					<h:dataTable columnClasses="column1,column2,column3,column4,column5" value="#{productsListBean.listOfProducts}"  styleClass="table table-hover" tableStyleClass="table table-striped" var="product">
-						<h:column>
+					<b:dataTable columnClasses="column1,column2,column3,column4,column5" value="#{productsListBean.listOfProducts}"  styleClass="table table-hover" tableStyleClass="table table-striped" var="product">
+						<b:column>
 							<f:facet name="header">Name</f:facet>
 							<h:outputText id="name" value="#{product.name}"/>
-						</h:column>
-						<h:column>
+						</b:column>
+						<b:column>
 							<f:facet name="header">Description</f:facet>
 							<h:outputText id="description" value="#{product.description}"/>
-						</h:column>
-						<h:column>
+						</b:column>
+						<b:column>
 							<f:facet name="header">Price</f:facet>
-							<h:outputText id="lablPrice" value="#{product.price}" size="5" rendered="#{!productsListBean.edit}" />
+							<h:outputText id="labelPrice" value="#{product.price}" size="5" rendered="#{!productsListBean.edit}" />
 							<h:inputText id="inputPrice" value="#{product.price}" size="5" rendered="#{productsListBean.edit}" />
-						</h:column>
-						<h:column rendered="#{not empty isadmin and isadmin == true}">
+						</b:column>
+						<b:column rendered="#{not empty isadmin and isadmin == true}">
 							<f:facet name="header">Update</f:facet>
-							<b:commandButton rendered="#{!productsListBean.edit}" ajax="true" update="@form" id="editButton" look="info" icon="pencil" value="Edit" action="#{productsListBean.edit(product)}" >
+							<b:commandButton rendered="#{!productsListBean.edit}" id="editButton" look="info" icon="pencil" value="Edit" action="#{productsListBean.edit(product)}" >
 							</b:commandButton>
-							<b:commandButton rendered="#{productsListBean.edit}" id="saveButton" look="info" update="@form" icon="pencil" type="submit" value="Update" action="#{productsListBean.save(product)}" onclick="location.reload();" >
+							<b:commandButton rendered="#{productsListBean.edit}" id="saveButton" look="info" update="@form" icon="pencil" value="Update" action="#{productsListBean.save(product)}" onclick="document.getElementById('frmProdutos:labelPrice').val()=document.getElementById('frmProdutos:inputPrice').val();" >
 							</b:commandButton>
-						</h:column>
-						<h:column rendered="#{not empty isadmin and isadmin == true}">
+						</b:column>
+						<b:column rendered="#{not empty isadmin and isadmin == true}">
 							<f:facet name="header">Remove</f:facet>
-							<b:button id="removeButton" icon="remove" look="danger" action="#{productsBean.remove}" onclick="location.reload();" value="Remove" />
-						</h:column>
-					</h:dataTable>
+							<b:commandButton action="#{productsListBean.remove(product)}" icon="remove" look="danger" title="Remove from basket"/>
+						</b:column>
+					</b:dataTable>
 				</b:column>
 			</b:row>
 		</b:container>
 		<b:message id="messages"/>
-	</h:form>
+	</b:form>
 </ui:composition>

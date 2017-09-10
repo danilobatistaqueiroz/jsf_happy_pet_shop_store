@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:b="http://bootsfaces.net/ui" 
+    xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Shop Cart</title>
+</h:head>
+<h:body>
+    <f:view>
+        <b:form id="itemsForm">
+            <p:outputPanel id="items">
+
+ <b:dataTable id="cartTable" value="#{cartBean.itemList}" var="itemCart" class="editableCartTable">
+   <b:dataTableColumn >
+   		<b:inputText value="#{itemCart.name}" rendered="#{itemCart.editable}" />
+        <h:outputText value="#{itemCart.name}" rendered="#{not itemCart.editable}" />
+   </b:dataTableColumn>
+   <b:dataTableColumn >
+   		<b:inputText value="#{itemCart.price}" rendered="#{itemCart.editable}" />
+        <h:outputText value="#{itemCart.price}" rendered="#{!itemCart.editable}" />
+   </b:dataTableColumn>
+   <b:dataTableColumn>
+   		<b:inputText value="#{itemCart.quantity}" />
+   </b:dataTableColumn>
+   <b:dataTableColumn>
+      <b:commandButton value="edit" icon="edit" ajax="true" update="@(.editableCartTable)"
+                onclick="ajax:cartBean.editItem(itemCart)" />
+      <b:commandButton value="remove" icon="remove" ajax="true" update="@(.editableCartTable)"
+                onclick="ajax:cartBean.removeItem(itemCart)" />
+   </b:dataTableColumn>
+   <b:dataTableColumn>
+   		<b:commandButton look="success" icon="plus" ajax="true" update="@(.editableCartTable)"
+   			onclick="ajax:itemCart.sum(1)"/>
+   		<b:commandButton look="danger" icon="minus" ajax="true" update="@(.editableCartTable)"
+   			onclick="ajax:itemCart.sum(-1)"/>
+   </b:dataTableColumn>
+ </b:dataTable>
+ 
+            </p:outputPanel>
+        </b:form>
+    </f:view>
+</h:body>
+</html>
