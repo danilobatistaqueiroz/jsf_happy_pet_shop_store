@@ -76,9 +76,9 @@ public class ProductsListBean implements Serializable {
 
 	@Transactional
 	public void remove(Product product) {
-		System.out.println("removing");
-		Product dbProduct = productDAO.findById(product.getId());
-		productDAO.remove(dbProduct);
+		System.out.println("removing the product by reference ");
+		//Product dbProduct = productDAO.findById(product.getId());
+		productDAO.remove(product);
 	}
 
 	private void editMode(boolean edit, Product product){

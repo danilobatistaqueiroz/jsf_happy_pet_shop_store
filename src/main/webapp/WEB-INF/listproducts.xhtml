@@ -26,26 +26,19 @@
 			</b:row>
 			<b:row>
 				<b:column>
-					<h:dataTable columnClasses="column1,column2,column3,column4" value="#{productsListBean.listOfProducts}"  styleClass="table table-hover" tableStyleClass="table table-striped" var="product">
-						<h:column>
-							<f:facet name="header">Name</f:facet>
-							<h:outputText id="name" value="#{product.name}"/>
-						</h:column>
-						<h:column>
-							<f:facet name="header">Description</f:facet>
-							<h:outputText id="description" value="#{product.description}"/>
-						</h:column>
-						<h:column>
-							<f:facet name="header">Price</f:facet>
-							<h:outputText id="price" value="#{product.price}"/>
-						</h:column>
-						<h:column>
-							<f:facet name="header">Add to Cart</f:facet>
+					<b:dataTable columnClasses="column1,column2,column3,column4" value="#{productsListBean.listOfProducts}"  styleClass="table table-hover" tableStyleClass="table table-striped" var="product">
+						<b:dataTableColumn value="#{product.name}">
+						</b:dataTableColumn>
+						<b:dataTableColumn value="#{product.description}">
+						</b:dataTableColumn>
+						<b:dataTableColumn value="#{product.price}">
+						</b:dataTableColumn>
+						<b:dataTableColumn label="Add to Cart">
 							<b:iconAwesome name="fa-shopping-cart" action="#{shopCartBean.update(product.id)}" onclick="location.reload();">
 								<f:ajax event="click" render="frmProdutos"/>
 							</b:iconAwesome>
-						</h:column>
-					</h:dataTable>
+						</b:dataTableColumn>
+					</b:dataTable>
 				</b:column>
 			</b:row>
 		</b:container>

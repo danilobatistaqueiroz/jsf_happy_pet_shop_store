@@ -7,29 +7,35 @@
 	<b:modal id="signupModal" rendered="#{empty username}" title="Regiter Your User" styleClass="modalPseudoClass">
 		<b:form id="registerForm">
 			
-			<h:outputText value="Username" />
-			<b:inputText id="username" value="#{login.user}" placeholder="type your name"/>
-			<b:message for="username"/>
+			<h:outputText value="User Name" />
+			<b:inputText id="userName" value="#{login.user}" update="@(.message)" placeholder="type your name"/>
+			<b:message for="userName"/>
 			
 			<h:outputText value="Password" />
-			<b:inputSecret id="password" value="#{login.pwd}" placeholder="type your password"/>
+			<b:inputSecret id="password" value="#{login.pwd}" update="@(.message)" placeholder="type your password"/>
 			<b:message for="password"/>
 			
-			<h:outputText value="RepeatPassword" />
-			<b:inputSecret id="repeatpassword" value="#{login.pwd}" placeholder="type your password again"/>
-			<b:message for="repeatpassword"/>
+			<h:outputText value="Repeat Password" />
+			<b:inputSecret id="repeatPassword" value="#{login.pwd}" placeholder="type your password again"/>
+			<b:message for="repeatPassword"/>
 			
 			<h:outputText value="Email" />
-			<b:inputText id="email" value="#{login.email}" placeholder="type your email"/>
+			<b:inputText id="email" value="#{login.email}" update="@(.message)" placeholder="type your email"/>
 			<b:message for="email"/>
 			
-			<h:outputText value="BirthDate" />
+			<h:outputText value="Phone Numer" />
+			<b:inputText id="phoneNumber" ajax="true" value="#{login.phone}" update="@(.message)" placeholder="type your phone number"
+				validator="com.labs.jsf.validations.PhoneValidator" validatorMessage="invalid phone number"
+			/>
+			<b:message for="phoneNumber"/>
+			
+			<h:outputText value="Birth Date" />
 			<b:inputText id="birthDate" value="#{login.birthDate}" placeholder="type your birth date"/>
 			<b:message for="birthDate"/>
 			
 			<br/>
 			
-	        <b:commandButton style="margin-right:5px;" id="registerButton" value="Register" look="success" action="#{login.registerUser}" dismiss="modal" />
+	        <b:commandButton style="margin-right:5px;" update="@form" id="registerButton" value="Register" look="success" action="#{login.registerUser}" dismiss="modal" />
 	        <b:button value="Cancel" look="danger" dismiss="modal" />
 	
 		    <b:message for="registerButton"/>

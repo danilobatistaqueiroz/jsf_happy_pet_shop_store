@@ -27,31 +27,24 @@
 			</b:row>
 			<b:row>
 				<b:column>
-					<b:dataTable columnClasses="column1,column2,column3,column4,column5" value="#{productsListBean.listOfProducts}"  styleClass="table table-hover" tableStyleClass="table table-striped" var="product">
-						<b:column>
-							<f:facet name="header">Name</f:facet>
-							<h:outputText id="name" value="#{product.name}"/>
-						</b:column>
-						<b:column>
-							<f:facet name="header">Description</f:facet>
-							<h:outputText id="description" value="#{product.description}"/>
-						</b:column>
-						<b:column>
-							<f:facet name="header">Price</f:facet>
+					<b:dataTable columnClasses="column1,column2,column3,column4,column5" value="#{productsListBean.listOfProducts}" class="editableProductsTable" var="product">
+						<b:dataTableColumn value="#{product.name}">
+						</b:dataTableColumn>
+						<b:dataTableColumn value="#{product.description}">
+						</b:dataTableColumn>
+						<b:dataTableColumn label="Price">
 							<h:outputText id="labelPrice" value="#{product.price}" size="5" rendered="#{!productsListBean.edit}" />
 							<h:inputText id="inputPrice" value="#{product.price}" size="5" rendered="#{productsListBean.edit}" />
-						</b:column>
-						<b:column rendered="#{not empty isadmin and isadmin == true}">
-							<f:facet name="header">Update</f:facet>
+						</b:dataTableColumn>
+						<b:dataTableColumn label="Update" rendered="#{not empty isadmin and isadmin == true}">
 							<b:commandButton rendered="#{!productsListBean.edit}" id="editButton" look="info" icon="pencil" value="Edit" action="#{productsListBean.edit(product)}" >
 							</b:commandButton>
 							<b:commandButton rendered="#{productsListBean.edit}" id="saveButton" look="info" update="@form" icon="pencil" value="Update" action="#{productsListBean.save(product)}" onclick="document.getElementById('frmProdutos:labelPrice').val()=document.getElementById('frmProdutos:inputPrice').val();" >
 							</b:commandButton>
-						</b:column>
-						<b:column rendered="#{not empty isadmin and isadmin == true}">
-							<f:facet name="header">Remove</f:facet>
-							<b:commandButton action="#{productsListBean.remove(product)}" icon="remove" look="danger" title="Remove from basket"/>
-						</b:column>
+						</b:dataTableColumn>
+						<b:dataTableColumn label="Remove" rendered="#{not empty isadmin and isadmin == true}">
+							<b:commandButton ajax="true" onclick="ajax:productsListBean.remove(product)" update="@(.editableProductsTable)"  icon="remove" look="danger" title="Remove from basket"/>
+						</b:dataTableColumn>
 					</b:dataTable>
 				</b:column>
 			</b:row>

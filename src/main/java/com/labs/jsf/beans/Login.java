@@ -2,6 +2,8 @@ package com.labs.jsf.beans;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Size;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import com.labs.jsf.util.SessionUtils;
 
@@ -25,8 +28,13 @@ public class Login implements Serializable {
 	@Size(min = 4, max = 10)
 	@NotEmpty
 	private String user;
+
 	private Date birthDate;
+	@Email
 	private String email;
+	@NotEmpty
+	@Size(min = 10, max = 12)
+	private String phone;
 
 	public String getPwd() {
 		return pwd;
@@ -124,13 +132,36 @@ public class Login implements Serializable {
 
 	public String registerUser() {
 		System.out.println("registering");
-		return "registered";
+		if(validations()==true){
+			return "registered";
+		} else {
+			return "";
+		}
 	}
 
 	public void forgotPassword() {
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Default user name: BootsFaces");
-		FacesContext.getCurrentInstance().addMessage("loginForm:username", msg);
+		FacesContext.getCurrentInstance().addMessage("loginForm:userName", msg);
 		msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Default password: rocks!");
 		FacesContext.getCurrentInstance().addMessage("loginForm:password", msg);
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	private boolean validations(){
+		Pattern pattern = Pattern.compile("\\d{2}-\\d{9}");
+		Matcher matcher = pattern.matcher(phone);
+		if (matcher.matches()==false) {
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Phone Number must be in the form XX-XXXXXXXXX");
+			FacesContext.getCurrentInstance().addMessage("registerForm:phoneNumber", msg);
+			return false;
+		}
+		return true;
 	}
 }

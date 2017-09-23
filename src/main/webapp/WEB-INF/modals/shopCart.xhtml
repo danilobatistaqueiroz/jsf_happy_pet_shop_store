@@ -14,27 +14,27 @@
 					<b:dataTable id="cartTable" value="#{cartBean.itemList}" var="itemCart" class="editableCartTable">
 						<b:dataTableColumn value="#{itemCart.name}">
 						</b:dataTableColumn>
-						<b:dataTableColumn value="#{itemCart.description}">
-						</b:dataTableColumn>
 						<b:dataTableColumn value="#{itemCart.price}">
 						</b:dataTableColumn>
 						<b:dataTableColumn label="Quantity">
-							<b:inputText id="qtd" value="#{itemCart.quantity}" size="4" />
 							<b:commandButton size="xs" icon="plus" ajax="true"
 								update="qtd :itemsForm:total" onclick="ajax:itemCart.sum(1)" />
+							<b:inputText id="qtd" value="#{itemCart.quantity}" style="margin-right:0px;height:27px;text-align:center" size="2" />
 							<b:commandButton size="xs" icon="minus" ajax="true"
 								update="qtd @(.total)" onclick="ajax:itemCart.sum(-1)" />
 						</b:dataTableColumn>
 						<b:dataTableColumn label=" ">
 							<b:commandButton look="danger" icon="trash" ajax="true"
-								update="@(.editableCartTable) @(.total)" value="Remove"
+								update="@(.editableCartTable) @(.total)" 
 								onclick="ajax:cartBean.removeItem(itemCart)" />
 						</b:dataTableColumn>
 					</b:dataTable>
-					Total Order: $<h:outputText id="total" class="total" value="#{cartBean.getTotalOrderValue()}" />
+					<span style="color:red">Total Order: $<h:outputText id="total" class="total" value="#{cartBean.getTotalOrderValue()}" /></span>
 				</p:outputPanel>
 			</b:modal>
-			<b:commandButton value="add item" onclick="ajax:cartBean.addItem('a','aa',1,1)" update="itemsForm"/>
+		</b:form>
+		<b:form id="cartForm">
+			<b:commandButton value="add item" onclick="ajax:cartBean.addItem('Top Paw Dog Pad','',5.77,1)" update="itemsForm"/>
 		</b:form>
 		<b:button value="show cart" look="success" onclick="$('.modalPseudoClass').modal()" size="lg"/>
 	</f:view>

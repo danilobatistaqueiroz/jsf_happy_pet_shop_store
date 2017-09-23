@@ -2,10 +2,10 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.labs.jsf</groupId>
-  <artifactId>JsfTutorials</artifactId>
+  <artifactId>PetShop</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>JsfTutorials Maven Webapp</name>
+  <name>Pet Shop Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <repositories>
   	<repository>
@@ -123,7 +123,7 @@
 		</dependency>
   </dependencies>
   <build>
-    <finalName>JsfTutorials</finalName>
+    <finalName>PetShop</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>

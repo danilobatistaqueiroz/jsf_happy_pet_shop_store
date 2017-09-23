@@ -26,6 +26,11 @@ public class ProductDAO {
 		manager.persist(product);
 	}
 
+	public void remove(long id) {
+		Product product = manager.getReference(Product.class, id);
+		manager.remove(product);
+	}
+
 	public void remove(Product product) {
 		manager.remove(product);
 	}
