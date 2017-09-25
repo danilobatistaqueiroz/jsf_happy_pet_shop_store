@@ -3,10 +3,13 @@ package com.labs.jsf.beans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import com.labs.jsf.model.ItemCart;
+import com.labs.jsf.model.Product;
 
 @Named
 @ViewScoped
@@ -26,12 +29,25 @@ public class CartBean implements Serializable {
 	@PostConstruct
 	public void init(){
 	}
-
-	public void addItem(String name, String description, double price, int quantity){
-		ItemCart i = new ItemCart(1,name,description,price,quantity);
-		itemList.add(i);
+	
+	public void update(Product product, int qtd) {
+		long itemId = product.getId();
+		ItemCart pc = itemList.stream().
+				filter(p -> p.getItem().getId() == itemId).
+				findFirst().orElseGet(()->addItem(product,0));
+		if(pc.getQuantity()==0 && qtd<=0) {
+			itemList.removeIf(p -> p.getItem().getId() == itemId);
+		} else {
+			pc.setQuantity(pc.getQuantity() + qtd);
+		}
 	}
 
+	public ItemCart addItem(Product product, int qtd){
+		ItemCart i = new ItemCart(product, qtd);
+		itemList.add(i);
+		return i;
+	}
+	
 	public void addItem(ItemCart item){
 		ItemCart i = itemList.stream().findFirst().orElse(item);
 		itemList.add(i);

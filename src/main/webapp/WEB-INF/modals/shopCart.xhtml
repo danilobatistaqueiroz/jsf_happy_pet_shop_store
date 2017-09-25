@@ -1,42 +1,28 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<title>Shopping Cart</title>
-</h:head>
-<h:body>
-	<f:view>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<b:modal id="shopcartModal" title="Your Shopping Cart" styleClass="modalPseudoClass">
 		<b:form id="itemsForm">
-			<b:modal id="shopcartModal" title="Your Shopping Cart" styleClass="modalPseudoClass">
-				<p:outputPanel id="items">
-					<b:dataTable id="cartTable" value="#{cartBean.itemList}" var="itemCart" class="editableCartTable">
-						<b:dataTableColumn value="#{itemCart.name}">
-						</b:dataTableColumn>
-						<b:dataTableColumn value="#{itemCart.price}">
-						</b:dataTableColumn>
-						<b:dataTableColumn label="Quantity">
-							<b:commandButton size="xs" icon="plus" ajax="true"
-								update="qtd :itemsForm:total" onclick="ajax:itemCart.sum(1)" />
-							<b:inputText id="qtd" value="#{itemCart.quantity}" style="margin-right:0px;height:27px;text-align:center" size="2" />
-							<b:commandButton size="xs" icon="minus" ajax="true"
-								update="qtd @(.total)" onclick="ajax:itemCart.sum(-1)" />
-						</b:dataTableColumn>
-						<b:dataTableColumn label=" ">
-							<b:commandButton look="danger" icon="trash" ajax="true"
-								update="@(.editableCartTable) @(.total)" 
-								onclick="ajax:cartBean.removeItem(itemCart)" />
-						</b:dataTableColumn>
-					</b:dataTable>
-					<span style="color:red">Total Order: $<h:outputText id="total" class="total" value="#{cartBean.getTotalOrderValue()}" /></span>
-				</p:outputPanel>
-			</b:modal>
+			<p:outputPanel id="items">
+				<b:dataTable id="cartTable" value="#{cartBean.itemList}" var="itemCart" class="editableCartTable">
+					<b:dataTableColumn value="#{itemCart.name}">
+					</b:dataTableColumn>
+					<b:dataTableColumn value="#{itemCart.price}">
+					</b:dataTableColumn>
+					<b:dataTableColumn label="Quantity">
+						<b:commandButton size="xs" icon="plus" ajax="true" update="qtd @form:total" onclick="ajax:itemCart.sum(1)" />
+						<b:inputText id="qtd" value="#{itemCart.quantity}" style="margin-right:0px;height:27px;text-align:center" size="2" />
+						<b:commandButton size="xs" icon="minus" ajax="true" update="qtd @form:total" onclick="ajax:itemCart.sum(-1)" />
+					</b:dataTableColumn>
+					<b:dataTableColumn label=" ">
+						<b:commandButton look="danger" icon="trash" ajax="true" update="@(.editableCartTable)" onclick="ajax:cartBean.removeItem(itemCart)" />
+					</b:dataTableColumn>
+				</b:dataTable>
+				<span style="color: red">Total Order: $<h:outputText id="total" class="total" value="#{cartBean.getTotalOrderValue()}" /></span>
+			</p:outputPanel>
 		</b:form>
-		<b:form id="cartForm">
-			<b:commandButton value="add item" onclick="ajax:cartBean.addItem('Top Paw Dog Pad','',5.77,1)" update="itemsForm"/>
-		</b:form>
-		<b:button value="show cart" look="success" onclick="$('.modalPseudoClass').modal()" size="lg"/>
-	</f:view>
-</h:body>
-</html>
+	</b:modal>
+</ui:composition>

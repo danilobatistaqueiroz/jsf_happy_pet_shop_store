@@ -43,9 +43,7 @@ public class ProductsListBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		System.out.println("passa aqui !!!!");
 		if(this.listProducts.size()==0){
-			System.out.println("$$$$$$$ loading products");
 			this.listProducts = productDAO.list();
 		}
 	}
@@ -56,12 +54,10 @@ public class ProductsListBean implements Serializable {
 	}
 
 	public List<Product> getListOfProducts() {
-		System.out.println("getting the list of products");
 		return listProducts;
 	}
 
 	public void edit(Product product) {
-		System.out.println("### editable=true  ###");
 		editMode(true, product);
 	}
 

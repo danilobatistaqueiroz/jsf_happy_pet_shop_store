@@ -163,7 +163,7 @@
                     </pool>
                     <security>
                         <user-name>root</user-name>
-                        <password>sa</password>
+                        <password>1234</password>
                     </security>
                     <validation>
                         <check-valid-connection-sql>SELECT 1</check-valid-connection-sql>

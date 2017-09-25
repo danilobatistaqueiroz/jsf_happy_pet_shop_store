@@ -10,11 +10,13 @@ public class ItemCart {
 	public ItemCart(){
 
 	}
-	public ItemCart(int id, String name, String description, double price, int quantity){
-		if(quantity>0){
-			this.item = new Product(id,name,description,price);
-			this.quantity = quantity;
-		}
+	public ItemCart(Product product, int quantity){
+		this.item = new Product(product.getId(),product.getName(),product.getDescription(),product.getPrice());
+		this.quantity = quantity;
+	}
+	public ItemCart(long id, String name, String description, double price, int quantity){
+		this.item = new Product(id,name,description,price);
+		this.quantity = quantity;
 	}
 
 	public int sum(int quantity){

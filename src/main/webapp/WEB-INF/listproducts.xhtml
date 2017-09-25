@@ -3,27 +3,17 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:b="http://bootsfaces.net/ui"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 	<style>
 		.column1 { width: 100px; }
 		.column2 { width: 200px; }
 		.column3 { width: 10px; }
 		.column4 { width: 10px; }
 	</style>
+		<ui:include rendered="#{not empty username}" src="/WEB-INF/modals/shopCart.xhtml" />
 		<h:form id="frmProdutos">
-
 		<b:container style="margin-left:10px;margin-right:20px;">
-			<b:row>
-			<b:column span="6">
-				<h:outputText value="#{login.user}"/>
-			    <b:inputText id="productSearch" placeholder="Search The Products" value="#{productsListBean.productSearch}" label="Products:" >
-			        <f:facet name="append">
-			            <b:commandButton look="primary" value="Search" action="#{productsListBean.search(productsListBean.productSearch)}" iconAwesome="fa-search "/>
-			        </f:facet>
-			    </b:inputText>
-				<h:outputText value="#{login.user}"/>
-			</b:column>
-			</b:row>
 			<b:row>
 				<b:column>
 					<b:dataTable columnClasses="column1,column2,column3,column4" value="#{productsListBean.listOfProducts}"  styleClass="table table-hover" tableStyleClass="table table-striped" var="product">
@@ -34,9 +24,8 @@
 						<b:dataTableColumn value="#{product.price}">
 						</b:dataTableColumn>
 						<b:dataTableColumn label="Add to Cart">
-							<b:iconAwesome name="fa-shopping-cart" action="#{shopCartBean.update(product.id)}" onclick="location.reload();">
-								<f:ajax event="click" render="frmProdutos"/>
-							</b:iconAwesome>
+							<b:icon name="shopping-cart" oncomplete="$('#shopcartModal').modal('show');" onclick="ajax:cartBean.update(product,1);" update=":itemsForm">
+							</b:icon>
 						</b:dataTableColumn>
 					</b:dataTable>
 				</b:column>
