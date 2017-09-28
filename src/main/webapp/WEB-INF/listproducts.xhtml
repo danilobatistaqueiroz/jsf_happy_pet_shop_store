@@ -13,6 +13,10 @@
 	</style>
 		<ui:include rendered="#{not empty username}" src="/WEB-INF/modals/shopCart.xhtml" />
 		<h:form id="frmProdutos">
+			<b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
+        	show-detail="true" show-summary="false" allowDismiss="true"
+        	delay="2000" escape="true" timer="1000" />
+        	<b:commandButton value="Fatal" actionListener="#{productsListBean.fatal}" update="@form"/>
 		<b:container style="margin-left:10px;margin-right:20px;">
 			<b:row>
 				<b:column>

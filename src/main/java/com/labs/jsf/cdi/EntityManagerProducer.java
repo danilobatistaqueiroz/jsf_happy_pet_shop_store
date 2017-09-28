@@ -10,7 +10,7 @@ import javax.persistence.PersistenceUnit;
 @ApplicationScoped
 public class EntityManagerProducer {
 
-	@PersistenceUnit
+	@PersistenceUnit(unitName = "postgre-persistence-unit")
 	private EntityManagerFactory manager;
 
 	@Produces

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import com.labs.jsf.model.ItemCart;
@@ -39,6 +41,8 @@ public class CartBean implements Serializable {
 			itemList.removeIf(p -> p.getItem().getId() == itemId);
 		} else {
 			pc.setQuantity(pc.getQuantity() + qtd);
+			FacesContext context = FacesContext.getCurrentInstance();
+	       	context.addMessage(null, new FacesMessage("Successful",  "Your message: yes") );
 		}
 	}
 

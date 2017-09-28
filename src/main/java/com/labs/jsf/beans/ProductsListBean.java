@@ -11,6 +11,9 @@ import javax.transaction.Transactional;
 import com.labs.jsf.dao.ProductDAO;
 import com.labs.jsf.model.Product;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 @Named
 @ViewScoped
 public class ProductsListBean implements Serializable {
@@ -80,6 +83,11 @@ public class ProductsListBean implements Serializable {
 	private void editMode(boolean edit, Product product){
 		this.product = product;
 		this.edit = edit;
+	}
+	
+	public void fatal(){
+		FacesContext context = FacesContext.getCurrentInstance();
+       	context.addMessage(null, new FacesMessage("Successful",  "Your message: yes") );
 	}
 
 }
