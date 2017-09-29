@@ -12,7 +12,7 @@
 		.column4 { width: 10px; }
 	</style>
 		<ui:include rendered="#{not empty username}" src="/WEB-INF/modals/shopCart.xhtml" />
-		<h:form id="frmProdutos">
+		<h:form id="frmProducts">
 			<b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
         	show-detail="true" show-summary="false" allowDismiss="true"
         	delay="2000" escape="true" timer="1000" />
@@ -20,6 +20,11 @@
 		<b:container style="margin-left:10px;margin-right:20px;">
 			<b:row>
 				<b:column>
+					<b:commandButton value="persistVendor" action="#{productsListBean.persistVendor()}" />
+					<b:dataTable value="#{productsListBean.listNames()}"  styleClass="table table-hover" tableStyleClass="table table-striped" var="name">
+						<b:dataTableColumn value="#{name}">
+						</b:dataTableColumn>
+					</b:dataTable>
 					<b:dataTable columnClasses="column1,column2,column3,column4" value="#{productsListBean.listOfProducts}"  styleClass="table table-hover" tableStyleClass="table table-striped" var="product">
 						<b:dataTableColumn value="#{product.name}">
 						</b:dataTableColumn>
@@ -28,7 +33,7 @@
 						<b:dataTableColumn value="#{product.price}">
 						</b:dataTableColumn>
 						<b:dataTableColumn label="Add to Cart">
-							<b:icon name="shopping-cart" oncomplete="$('#shopcartModal').modal('show');" onclick="ajax:cartBean.update(product,1);" update=":itemsForm">
+							<b:icon name="shopping-cart" onclick="ajax:cartBean.update(product,1);" update=":frmProducts :itemsForm">
 							</b:icon>
 						</b:dataTableColumn>
 					</b:dataTable>

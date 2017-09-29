@@ -3,16 +3,19 @@ package com.labs.jsf.beans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
-import com.labs.jsf.dao.ProductDAO;
-import com.labs.jsf.model.Product;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+import com.labs.jsf.dao.ProductDAO;
+import com.labs.jsf.dao.VendorDAO;
+import com.labs.jsf.model.Product;
+import com.labs.jsf.model.Vendor;
 
 @Named
 @ViewScoped
@@ -32,6 +35,9 @@ public class ProductsListBean implements Serializable {
 	public void setProductSearch(String productSearch) {
 		this.productSearch = productSearch;
 	}
+	
+	@Inject
+	private VendorDAO vendorDAO;
 
 	@Inject
 	private ProductDAO productDAO;
@@ -58,6 +64,22 @@ public class ProductsListBean implements Serializable {
 
 	public List<Product> getListOfProducts() {
 		return listProducts;
+	}
+	
+	public List<Vendor> listVendors() {
+		List<Vendor> listVendors = vendorDAO.list();
+		return listVendors;
+	}
+	public List<String> listNames() {
+		List<String> listVendorsNames = vendorDAO.listNames();
+		return listVendorsNames;
+	}
+	@Transactional
+	public void persistVendor() {
+		Vendor vendor = new Vendor( ); 
+		vendor.setId( 2 );
+		vendor.setName( "dell" );
+		vendorDAO.persist(vendor);
 	}
 
 	public void edit(Product product) {

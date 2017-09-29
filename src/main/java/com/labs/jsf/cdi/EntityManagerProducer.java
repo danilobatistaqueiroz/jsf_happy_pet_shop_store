@@ -10,6 +10,7 @@ import javax.persistence.PersistenceUnit;
 @ApplicationScoped
 public class EntityManagerProducer {
 
+	//@PersistenceUnit(unitName = "labs-persistence-unit")
 	@PersistenceUnit(unitName = "postgre-persistence-unit")
 	private EntityManagerFactory manager;
 

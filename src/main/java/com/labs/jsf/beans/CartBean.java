@@ -42,7 +42,7 @@ public class CartBean implements Serializable {
 		} else {
 			pc.setQuantity(pc.getQuantity() + qtd);
 			FacesContext context = FacesContext.getCurrentInstance();
-	       	context.addMessage(null, new FacesMessage("Successful",  "Your message: yes") );
+	       	context.addMessage(null, new FacesMessage("Your ShopCart",  product.getName()+" was added!") );
 		}
 	}
 

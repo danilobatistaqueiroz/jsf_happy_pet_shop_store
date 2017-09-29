@@ -1,3 +1,10 @@
+--root sa
+--CREATE DATABASE DBCOM CHARACTER SET utf8 COLLATE utf8_bin;
+--CREATE USER 'usercom'@'localhost' IDENTIFIED BY '123';
+--GRANT ALL PRIVILEGES ON DBCOM.* TO 'usercom'@'localhost' WITH GRANT OPTION;
+
+
+
 -- MySQL dump 10.13  Distrib 5.7.19, for Linux (x86_64)
 --
 -- Host: localhost    Database: DBCOM
@@ -98,3 +105,13 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2017-09-07 23:12:22
+
+
+CREATE TABLE vendor (
+  id int PRIMARY KEY,
+  name varchar(50) NOT NULL
+)
+
+INSERT INTO vendor VALUES (1, 'apple')
+
+

@@ -152,6 +152,14 @@
                         <password>sa</password>
                     </security>
                 </datasource>
+                <datasource jndi-name="java:/PostGreDS" pool-name="PostgrePool">
+                    <connection-url>jdbc:postgresql://localhost/DBCOM</connection-url>
+                    <driver>postgres</driver>
+                    <security>
+                        <user-name>usercom</user-name>
+                        <password>123</password>
+                    </security>
+                </datasource>
                 <datasource jndi-name="java:jboss/datasources/MySqlDS" pool-name="MySqlDS" enabled="true" use-ccm="false">
                     <connection-url>jdbc:mysql://localhost:3306/DBCOM?useSSL=false</connection-url>
                     <driver-class>com.mysql.jdbc.Driver</driver-class>
@@ -162,8 +170,8 @@
                         <max-pool-size>50</max-pool-size>
                     </pool>
                     <security>
-                        <user-name>root</user-name>
-                        <password>1234</password>
+                        <user-name>usercom</user-name>
+                        <password>123</password>
                     </security>
                     <validation>
                         <check-valid-connection-sql>SELECT 1</check-valid-connection-sql>
@@ -182,6 +190,9 @@
                     </driver>
                     <driver name="mysql" module="com.mysql.driver">
                         <driver-class>com.mysql.jdbc.Driver</driver-class>
+                    </driver>
+                    <driver name="postgres" module="org.postgres">
+                        <driver-class>org.postgresql.Driver</driver-class>
                     </driver>
                 </drivers>
             </datasources>
