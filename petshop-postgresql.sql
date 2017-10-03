@@ -4,6 +4,7 @@
 --run server:   pg_ctl -D "c:\users\danilo.queiroz\Downloads\pgsql\data" -l logfile start
 --create db:    createdb DBCOM
 --create user:  createuser --interactive -l -P -s -d postgres
+--createuser --interactive -l -P -s -d usercom
 
 --installing postgresql on ubuntu--
 --update repositories: sudo apt-get update
@@ -15,6 +16,9 @@
 --add a new linux user: sudo adduser usercom
 --create a new db: createdb DBCOM
 --psql --dbname=DBCOM
+
+
+--GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO usercom;
 
 --configuring wildfly's datasource (http://www.mastertheboss.com/jboss-server/jboss-datasource/configuring-a-datasource-with-postgresql-and-jboss-wildfly)
 --./standalone.sh
